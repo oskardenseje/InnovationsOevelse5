@@ -8,10 +8,15 @@ const styles = StyleSheet.create({
         color: 'red',
     },
     inputField: {
-        borderWidth: 1,
+        borderWidth: 2,
         margin: 10,
         padding: 10,
     },
+    header: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    }
 });
 
 export default class LoginForm extends React.Component {
@@ -61,7 +66,7 @@ export default class LoginForm extends React.Component {
     render = () => {
         const { errorMessage, email, password, isCompleted } = this.state;
         if (isCompleted) {
-            return <Text>You are now signed up</Text>;
+            return <Text>Du er nu klar til at tilføje din første countdown!</Text>;
         }
         return (
             <View>
@@ -92,6 +97,6 @@ export default class LoginForm extends React.Component {
         if (isLoading) {
             return <ActivityIndicator />;
         }
-        return <Button onPress={this.handleSubmit} title="Login" />;
+        return <Button onPress={this.handleSubmit} title="Log på" />;
     };
 }

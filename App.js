@@ -1,13 +1,73 @@
 import React,{Component} from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import Constants from 'expo-constants';
-
-import SignUpForm from './components/SignUpForm';
+import SignUpForm from './components/Login og Signup/SignUpForm';
 import firebase from 'firebase';
-import LoginForm from "./components/LoginForm";
-import ProfilScreen from "./components/ProfilScreen";
+import LoginForm from "./components/Login og Signup/LoginForm";
+import ProfilScreen from "./components/MainViews/ProfilScreen";
+import MarkedspladsScreen from "./components/MainViews/MarkedspladsScreen";
+import SalesScreen from "./components/MainViews/SalesScreen";
 // or any pure javascript modules available in npm
-import { Card } from 'react-native-paper';
+import {BottomNavigation, Card} from 'react-native-paper';
+import { createBottomTabNavigator } from "react-navigation-tabs";
+import { AntDesign } from '@expo/vector-icons';
+import {createAppContainer} from "react-navigation";
+import CameraScreen from "./components/MainViews/CameraScreen";
+
+
+const TabNavigator = createBottomTabNavigator(
+    {
+      ProfilScreen: {
+        screen: ProfilScreen,
+        navigationOptions: {
+          tabBarLabel: "Profil",
+          tabBarIcon: ({tintColor}) => (
+              <AntDesign name="user" size={24} color="black"/>
+          )
+        },
+      },
+      MarkedspladsScreen: {
+        screen: MarkedspladsScreen,
+        navigationOptions: {
+          tabBarLabel: "Markedsplads",
+          tabBarIcon: ({tintColor}) => (
+              <AntDesign name="shoppingcart" size={24} color={tintColor}/>
+
+          )
+        },
+      },
+      SalesScreen: {
+        screen: SalesScreen,
+        navigationOptions: {
+          tabBarLabel: "Sælg",
+          tabBarIcon: ({tintColor}) => (
+              <AntDesign name="tags" size={24} color="black"/>
+          )
+        },
+      },
+      CameraScreen: {
+          screen: CameraScreen,
+          navigationOptions: {
+              tabBarLabel: "Kamera",
+              tabBarIcon: ({tintColor}) => (
+                  <AntDesign name="camera" size={24} color="black"/>
+              )
+          }
+      }
+    },
+    {
+      tabBarOptions: {
+        showIcon: true,
+        labelStyle: {
+          fontSize: 15,
+        },
+        activeTintColor: 'blue',
+        inactiveTintColor: 'gray',
+        size: 40
+      }
+    }
+)
+
+const AppContainer = createAppContainer(TabNavigator);
 
 export default class App extends Component {
   state = {user:null}
@@ -38,38 +98,32 @@ export default class App extends Component {
     if(!user){
       return (
           <View style={styles.container}>
-            <Text style={styles.paragraph}>
-              Opret eller Login med din firebase Email
+            <Text style={styles.header}>
+              Login på Second Hand Clothing - eller registrer dig nu!
             </Text>
             <Card>
-              <SignUpForm />
+              <LoginForm />
             </Card>
             <Card>
-              <LoginForm />
+              <SignUpForm />
             </Card>
           </View>
       )
     } else {
       return (
-
-          <ProfilScreen user={user}/>
+            <AppContainer/>
       )
     }
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
-    padding: 8,
-  },
-  paragraph: {
-    margin: 24,
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
+    container: {
+        margin: 50
+    },
+    header: {
+        fontSize: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+    }
 });

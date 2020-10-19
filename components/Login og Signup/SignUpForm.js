@@ -8,10 +8,15 @@ const styles = StyleSheet.create({
         color: 'red',
     },
     inputField: {
-        borderWidth: 1,
+        borderWidth: 2,
         margin: 10,
         padding: 10,
     },
+    header: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    }
 });
 
 export default class SignUpForm extends React.Component {
@@ -65,7 +70,7 @@ export default class SignUpForm extends React.Component {
         }
         return (
             <View>
-                <Text style = {styles.header}>Sign Up</Text>
+                <Text style = {styles.header}>Oprettelse</Text>
                 <TextInput
                     placeholder="email"
                     value={email}
@@ -92,6 +97,6 @@ export default class SignUpForm extends React.Component {
         if (isLoading) {
             return <ActivityIndicator />;
         }
-        return <Button onPress={this.handleSubmit} title="Create user" />;
+        return <Button onPress={this.handleSubmit} title="Opret mig!" />;
     };
 }
