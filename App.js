@@ -6,6 +6,7 @@ import LoginForm from "./components/Login og Signup/LoginForm";
 import ProfilScreen from "./components/MainViews/ProfilScreen";
 import MarkedspladsScreen from "./components/MainViews/MarkedspladsScreen";
 import SalesScreen from "./components/MainViews/SalesScreen";
+import MessageScreen from "./components/MainViews/MessageScreen";
 // or any pure javascript modules available in npm
 import {BottomNavigation, Card} from 'react-native-paper';
 import { createBottomTabNavigator } from "react-navigation-tabs";
@@ -50,6 +51,15 @@ const TabNavigator = createBottomTabNavigator(
               tabBarLabel: "Kamera",
               tabBarIcon: ({tintColor}) => (
                   <AntDesign name="camera" size={24} color="black"/>
+              )
+          }
+      },
+      MessageScreen: {
+          screen: MessageScreen,
+          navigationOptions: {
+              tabBarLabel: "Indbakke",
+              tabBarIcon: ({tintColor}) => (
+                  <AntDesign name="message1" size={24} color="black"/>
               )
           }
       }
